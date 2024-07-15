@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -104,7 +106,7 @@ class FirstScreen extends StatelessWidget {
           onPressed: () {}
         ),
       ),
-      body: const Contain(),
+      body: const RowColumn(),
         // const Center(
         //   child: Text("Hello World!"),
         // ),
@@ -149,6 +151,36 @@ class Contain extends StatelessWidget {
         "Hi",
         style: TextStyle(fontSize: 40),
       ),
+    );
+  }
+}
+
+// Contoh Row dan Column
+class RowColumn extends StatelessWidget {
+  const RowColumn({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Icon(Icons.share),
+            Icon(Icons.thumb_up),
+            Icon(Icons.thumb_down)
+          ],
+        ), 
+        Column(
+          children: [
+            Text(
+              "Sebuah Judul",
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            ),
+            Text("Lorem ipsum dolor sit amet")
+          ],
+        )
+      ],
     );
   }
 }
