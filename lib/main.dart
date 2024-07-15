@@ -5,9 +5,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({
-    super.key
-  });
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -106,13 +104,50 @@ class FirstScreen extends StatelessWidget {
           onPressed: () {}
         ),
       ),
-      body: const Center(
-        child: Text("Hello World!"),
-      ),
+      body: const Contain(),
+        // const Center(
+        //   child: Text("Hello World!"),
+        // ),
       // Floating Action Button (FAB)
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {},
+      ),
+    );
+  }
+}
+
+// Contoh Container
+class Contain extends StatelessWidget {
+  const Contain({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.red,
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: Colors.green,
+          width: 3
+        ),
+        // borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black,
+            offset: Offset(3, 6),
+            blurRadius: 10
+          )
+        ]
+      ),
+      // color: Colors.red,
+      // width: 200,
+      // height: 100,
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
+      child: const Text(
+        "Hi",
+        style: TextStyle(fontSize: 40),
       ),
     );
   }
