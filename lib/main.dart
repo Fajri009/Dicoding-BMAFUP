@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const Button()
+        home: const InputWidget()
     );
   }
 }
@@ -199,42 +199,191 @@ class _Button extends State<Button> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Column(
-            children: [
-              ElevatedButton(
-                  onPressed: () {},
-                  child: const Text("Tombol")
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Text("Text Button"),
-              ),
-              OutlinedButton(
-                  onPressed: () {},
-                  child: const Text("Outlined Button")
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.volume_up),
-                tooltip: "Increase volume by 10", // sebagai hint
-              ),
-              DropdownButton(
-                  items: const [
-                    DropdownMenuItem(value: "Dart", child: Text("Dart")),
-                    DropdownMenuItem(value: "Kotlin", child: Text("Kotlin")),
-                    DropdownMenuItem(value: "Swift", child: Text("Swift"))
-                  ],
-                  value: language,
-                  hint: const Text("Select Language"),
-                  onChanged: (String? value) {
-                    setState(() {
-                      language = value;
-                    });
-                  }
-              )
-            ],
+      appBar: AppBar(
+        title: const Text("Button"),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ElevatedButton(
+              onPressed: () {},
+              child: const Text("Tombol")
+          ),
+          TextButton(
+            onPressed: () {},
+            child: const Text("Text Button"),
+          ),
+          OutlinedButton(
+              onPressed: () {},
+              child: const Text("Outlined Button")
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.volume_up),
+            tooltip: "Increase volume by 10", // sebagai hint
+          ),
+          DropdownButton(
+              items: const [
+                DropdownMenuItem(value: "Dart", child: Text("Dart")),
+                DropdownMenuItem(value: "Kotlin", child: Text("Kotlin")),
+                DropdownMenuItem(value: "Swift", child: Text("Swift"))
+              ],
+              value: language,
+              hint: const Text("Select Language"),
+              onChanged: (String? value) {
+                setState(() {
+                  language = value;
+                });
+              }
           )
+        ],
+      ),
+    );
+  }
+}
+
+// Contoh Input Widget
+class InputWidget extends StatefulWidget {
+  const InputWidget({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _InputWidget();
+}
+
+class _InputWidget extends State<InputWidget> {
+  String _name = ""; // TextField
+  bool lightOn = false; // Switch
+  String? language; // Radio
+  bool agree = false; // Checkbox
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Input Widget"),
+      ),
+      // body: Column(
+      //   children: [
+      //     TextField(
+      //       onChanged: (String value) {
+      //         setState(() {
+      //           _name = value;
+      //         });
+      //       },
+      //       // Jika tidak ingin mengambil nilai setiap perubahan, tetapi hanya ketika seluruh input sudah selesai di-submit
+      //       // onSubmitted: (String value) {
+      //       //   setState(() {
+      //       //     _name = value;
+      //       //   });
+      //       // },
+      //     )
+      //   ],
+      // ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              decoration: const InputDecoration(
+                hintText: "Write your name here",
+                labelText: "Your Name"
+              ),
+              onChanged: (String value) {
+                setState(() {
+                  _name = value;
+                });
+              },
+            ),
+            const SizedBox(height: 20),
+            Switch(
+              value: lightOn,
+              onChanged: (bool value) {
+                setState(() {
+                  lightOn = value;
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(lightOn ? "Light On" : "Light Off"),
+                      duration: const Duration(seconds: 1)
+                    )
+                );
+              }
+            ),
+            const SizedBox(height: 20),
+            ListTile(
+              leading: Radio<String>(
+                value: "Dart",
+                groupValue: language,
+                onChanged: (String? value) {
+                  setState(() {
+                    language = value;
+                    showSnackbar();
+                  });
+                },
+              ),
+              title: const Text("Dart"),
+            ),
+            ListTile(
+              leading: Radio<String>(
+                value: "Kotlin",
+                groupValue: language,
+                onChanged: (String? value) {
+                  setState(() {
+                    language = value;
+                    showSnackbar();
+                  });
+                },
+              ),
+              title: const Text("Kotlin"),
+            ),
+            ListTile(
+              leading: Radio<String>(
+                value: "Swift",
+                groupValue: language,
+                onChanged: (String? value) {
+                  setState(() {
+                    language = value;
+                    showSnackbar();
+                  });
+                },
+              ),
+              title: const Text("Swift"),
+            ),
+            ListTile(
+              leading: Checkbox(
+                value: agree,
+                onChanged: (bool? value) {
+                  setState(() {
+                    agree = value!;
+                  });
+                },
+              ),
+              title: const Text("Agree / Disagree"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Text("Hello $_name"),
+                    );
+                  }
+                );
+              },
+              child: const Text("Submit")
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  void showSnackbar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('$language selected'),
+        duration: const Duration(seconds: 1),
       ),
     );
   }
