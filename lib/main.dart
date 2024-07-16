@@ -1,11 +1,9 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
 void main() {
-  runApp(const Codelab());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +16,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const FirstScreen()
+        home: const Button()
     );
   }
 }
@@ -187,81 +185,57 @@ class RowColumn extends StatelessWidget {
   }
 }
 
-// Codelab
-class Codelab extends StatelessWidget {
-  const Codelab({super.key});
+// Contoh Button
+class Button extends StatefulWidget {
+  const Button({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Wisata Bandung",
-      theme: ThemeData(),
-      home: const DetailScreen(),
-    );
-  }
+  State<StatefulWidget> createState() => _Button();
 }
 
-class DetailScreen extends StatelessWidget {
-  const DetailScreen({super.key});
+class _Button extends State<Button> {
+  String? language;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea( // SafeArea untuk margin atas menyesuaikan status bar device
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch, // stretch = match_parent di Android
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 16.0),
-              child: const Text(
-                  "Farm House Lembang",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold
-                  ),
-                )
-            ), // Judul
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 16.0),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      Icon(Icons.calendar_today),
-                      SizedBox(height: 8.0),
-                      Text("Open Everyday")
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Icon(Icons.watch_later_outlined),
-                      SizedBox(height: 8.0),
-                      Text("09.00 - 20:00")
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Icon(Icons.attach_money_rounded),
-                      SizedBox(height: 8.0),
-                      Text("Rp 25.000")
-                    ],
-                  ),
-                ],
+      body: SafeArea(
+          child: Column(
+            children: [
+              ElevatedButton(
+                  onPressed: () {},
+                  child: const Text("Tombol")
               ),
-            ), // Informasi dari tempat wisata
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: const Text(
-                "Berada di jalur utama Bandung-Lembang, Farm House menjadi objek wisata yang tidak pernah sepi pengunjung. Selain karena letaknya strategis, kawasan ini juga menghadirkan nuansa wisata khas Eropa. Semua itu diterapkan dalam bentuk spot swafoto Instagramable.",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16.0)
+              TextButton(
+                onPressed: () {},
+                child: const Text("Text Button"),
               ),
-            ) // Deskripsi
-          ],
-        ),
-      )
+              OutlinedButton(
+                  onPressed: () {},
+                  child: const Text("Outlined Button")
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.volume_up),
+                tooltip: "Increase volume by 10", // sebagai hint
+              ),
+              DropdownButton(
+                  items: const [
+                    DropdownMenuItem(value: "Dart", child: Text("Dart")),
+                    DropdownMenuItem(value: "Kotlin", child: Text("Kotlin")),
+                    DropdownMenuItem(value: "Swift", child: Text("Swift"))
+                  ],
+                  value: language,
+                  hint: const Text("Select Language"),
+                  onChanged: (String? value) {
+                    setState(() {
+                      language = value;
+                    });
+                  }
+              )
+            ],
+          )
+      ),
     );
   }
 }
