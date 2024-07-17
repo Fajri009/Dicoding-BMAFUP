@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const InputWidget()
+        home: const Images()
     );
   }
 }
@@ -384,6 +384,37 @@ class _InputWidget extends State<InputWidget> {
       SnackBar(
         content: Text('$language selected'),
         duration: const Duration(seconds: 1),
+      ),
+    );
+  }
+}
+
+// Contoh Image
+class Images extends StatelessWidget {
+  const Images({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Image"),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Image.network(
+              "https://picsum.photos/200/300",
+              width: 200,
+              height: 200,
+            ),
+            const SizedBox(height: 30),
+            Image.asset(
+              "images/android.png",
+              width: 200,
+              height: 200,
+            )
+          ],
+        ),
       ),
     );
   }
