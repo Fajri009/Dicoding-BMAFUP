@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const ScrollingScreenListViewSeparated()
+        home: const CompareExpandedFlexibleWidget()
     );
   }
 }
@@ -597,6 +597,149 @@ class ScrollingScreenListViewSeparated extends StatelessWidget {
         separatorBuilder: (BuildContext context, int index) {
           return const Divider();
         },
+      ),
+    );
+  }
+}
+
+// Contoh Expanded
+class RainbowExpended extends StatelessWidget {
+  const RainbowExpended({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              color: Colors.red,
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.orange,
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.yellow,
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.green,
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.blue,
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.indigo,
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.purple,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Contoh Flexible
+class CompareExpandedFlexibleWidget extends StatelessWidget {
+  const CompareExpandedFlexibleWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                ExpandedWidget(),
+                FlexibleWidget()
+              ],
+            ),
+            Row(
+              children: [
+                ExpandedWidget(),
+                ExpandedWidget(),
+              ],
+            ),
+            Row(
+              children: [
+                FlexibleWidget(),
+                FlexibleWidget(),
+              ],
+            ),
+            Row(
+              children: [
+                FlexibleWidget(),
+                ExpandedWidget(),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ExpandedWidget extends StatelessWidget {
+  const ExpandedWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.teal,
+          border: Border.all(color: Colors.white),
+        ),
+        child: const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Text(
+            'Expanded',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class FlexibleWidget extends StatelessWidget {
+  const FlexibleWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.tealAccent,
+          border: Border.all(color: Colors.white),
+        ),
+        child: const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Text(
+            'Flexible',
+            style: TextStyle(
+              color: Colors.teal,
+              fontSize: 24,
+            ),
+          ),
+        ),
       ),
     );
   }
