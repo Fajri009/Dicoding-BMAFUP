@@ -1,6 +1,4 @@
-import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +15,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const Font()
+        home: const ScrollingScreenListViewSeparated()
     );
   }
 }
@@ -437,6 +435,168 @@ class Font extends StatelessWidget {
           fontFamily: "Oswald",
           fontSize: 30
         ),
+      ),
+    );
+  }
+}
+
+// Contoh ListView
+class ScrollingScreen extends StatelessWidget {
+  const ScrollingScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ListView(
+        children: <Widget>[
+          Container(
+            height: 250,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              border: Border.all(color: Colors.black),
+            ),
+            child: const Center(
+              child: Text(
+                '1',
+                style: TextStyle(fontSize: 50),
+              ),
+            ),
+          ),
+          Container(
+            height: 250,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              border: Border.all(color: Colors.black),
+            ),
+            child: const Center(
+              child: Text(
+                '2',
+                style: TextStyle(fontSize: 50),
+              ),
+            ),
+          ),
+          Container(
+            height: 250,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              border: Border.all(color: Colors.black),
+            ),
+            child: const Center(
+              child: Text(
+                '3',
+                style: TextStyle(fontSize: 50),
+              ),
+            ),
+          ),
+          Container(
+            height: 250,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              border: Border.all(color: Colors.black),
+            ),
+            child: const Center(
+              child: Text(
+                '4',
+                style: TextStyle(fontSize: 50),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Contoh ListView Dinamis
+class ScrollingScreenDinamis extends StatelessWidget {
+  const ScrollingScreenDinamis({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final List<int> numberList = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    return Scaffold(
+      body: ListView(
+        children: numberList.map((number) {
+          return Container(
+            height: 250,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              border: Border.all(color: Colors.black),
+            ),
+            child: Center(
+              child: Text(
+                '$number', // Ditampilkan sesuai item
+                style: const TextStyle(fontSize: 50),
+              ),
+            ),
+          );
+        }).toList(), // perlu mengembalikan fungsi map menjadi objek List lagi
+      ),
+    );
+  }
+}
+
+// Contoh ListView Builder
+class ScrollingScreenListViewBuilder extends StatelessWidget {
+  const ScrollingScreenListViewBuilder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final List<int> numberList = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: numberList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            height: 250,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              border: Border.all(color: Colors.black),
+            ),
+            child: Center(
+              child: Text(
+                '${numberList[index]}',
+                style: const TextStyle(fontSize: 50),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+// Contoh ListView Separated
+class ScrollingScreenListViewSeparated extends StatelessWidget {
+  const ScrollingScreenListViewSeparated({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final List<int> numberList = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    return Scaffold(
+      body: ListView.separated(
+        itemCount: numberList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            height: 250,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              border: Border.all(color: Colors.black),
+            ),
+            child: Center(
+              child: Text(
+                '${numberList[index]}',
+                style: const TextStyle(fontSize: 50),
+              ),
+            ),
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return const Divider();
+        },
       ),
     );
   }
